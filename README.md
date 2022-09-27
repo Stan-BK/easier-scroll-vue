@@ -20,6 +20,7 @@ app.mount('#app')
 
 ```
 ```HTML
+// Easier-Scroll component will be registered as a global component, you can use it directly in template
 <easier-scroll>
   <div> // require one root element, easier-scroll will deal with it as a scroll container
     <div> // only allow one children for container
