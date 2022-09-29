@@ -1,7 +1,22 @@
-import { defineComponent, h, onMounted, VNode } from "vue";
+import { defineComponent, h, onMounted, VNode, watch } from "vue";
 import EasierScroll from 'easier-scroll'
 
 export default defineComponent({
+  inheritAttrs: false,
+  props: {
+    scrollPercentX: {
+      type: Number,
+      default: 0
+    },
+    scrollPercentY: {
+      type: Number,
+      default: 0
+    },
+    isHiddenScrollbar: {
+      type: Boolean,
+      default: true
+    }
+  },
   setup(props, { slots }) {
     let allSlots: VNode[] = slots.default!()
     if (allSlots.length !== 1) {
@@ -9,14 +24,24 @@ export default defineComponent({
     }
 
     let el
+    let config
     const wrap: VNode = allSlots[0]
+    const assign = Object.assign
 
     onMounted(() => {
-      EasierScroll(el.el)
+      config = EasierScroll(el.el, {
+        hidden: false
+      })
+      assign(config, props)
     })
-    
+
+    watch(() => props, (val) => {
+      assign(config, val)
+    }, {
+      deep: true
+    })
+      
     return () => {
-      // return h('h1', 'hhh')
       el = h(wrap)
       return el
     }

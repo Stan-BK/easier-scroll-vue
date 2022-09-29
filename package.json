@@ -14,7 +14,7 @@
   },
   "homepage": "https://github.com/Stan-BK/easier-scroll-vue#readme",
   "dependencies": {
-    "easier-scroll": "^1.0.1",
+    "easier-scroll": "^1.0.4",
     "vue": "^3.2.39"
   }
 }
