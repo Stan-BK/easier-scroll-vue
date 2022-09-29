@@ -23,27 +23,27 @@ export default defineComponent({
       throw new Error(`Easier Scroll's slot expect only 1 root element as scroll container`)
     }
 
-    let el
-    let config
-    const wrap: VNode = allSlots[0]
-    const assign = Object.assign
-
-    onMounted(() => {
-      config = EasierScroll(el.el, {
-        hidden: false
-      })
-      assign(config, props)
-    })
-
-    watch(() => props, (val) => {
-      assign(config, val)
-    }, {
+    return {
+      wrap: allSlots[0],
+      config: {
+        value: null
+      },
+      props
+    }
+  },
+  render() {
+    return h(this.wrap)
+  },
+  mounted() {
+    this.config.value = EasierScroll(this.$el)
+    Object.assign(this.config.value, this.props)
+  },
+  watch: {
+    props: {
+      handler(val) {
+        Object.assign(this.config.value, val)
+      },
       deep: true
-    })
-      
-    return () => {
-      el = h(wrap)
-      return el
     }
   }
 })
