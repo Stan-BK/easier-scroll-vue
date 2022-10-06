@@ -26,6 +26,17 @@ app.mount('#app')
 const X = ref(0)
 const Y = ref(0)
 const isHidden = ref(true)
+
+// when scrollPercentX been updated, this function willfiled, and it receive an argument which is scrollPercentX
+function updateXcb(scrollPercentX) {
+  // ...do something
+}
+
+// effection same as the function above
+function updateYcb(scrollPercentY) {
+  // ...do something
+}
+
 </script>
 ```
 ```HTML
@@ -33,7 +44,7 @@ const isHidden = ref(true)
 
 <template>
   // can access scrollLeft/scrollTop/scrollbarVisibility by reactive value
-  <easier-scroll :scrollPercentX="X" :scrollPercentY="Y" :isHiddenScrollbar="hidden">
+  <easier-scroll :scrollPercentX="X" :scrollPercentY="Y" :isHiddenScrollbar="hidden" @scrollX="updateXcb" @scrollY="updateYcb">
     <div> // require one root element, easier-scroll will deal with it as a scroll container
       <div> // only allow one root children for container
         ...

@@ -1,4 +1,4 @@
-import { defineComponent, h, onMounted, VNode, watch } from "vue";
+import { defineComponent, h, ref, VNode } from "vue";
 import EasierScroll from 'easier-scroll'
 
 export default defineComponent({
@@ -25,9 +25,7 @@ export default defineComponent({
 
     return {
       wrap: allSlots[0],
-      config: {
-        value: null
-      },
+      config: ref({}),
       props
     }
   },
@@ -35,7 +33,15 @@ export default defineComponent({
     return h(this.wrap)
   },
   mounted() {
-    this.config.value = EasierScroll(this.$el)
+    const that = this
+    this.config.value = EasierScroll(this.$el, {
+      scrollXcb(scrollPercentX) {
+        that.$emit('scrollX', scrollPercentX)
+      },
+      scrollYcb(scrollPercentY) {
+        that.$emit('scrollY', scrollPercentY)
+      }
+    })
     Object.assign(this.config.value, this.props)
   },
   watch: {

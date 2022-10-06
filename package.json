@@ -1,6 +1,6 @@
 {
   "name": "easier-scroll-vue",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "An easier scroll way in Vue",
   "main": "index.js",
   "repository": {
@@ -14,7 +14,7 @@
   },
   "homepage": "https://github.com/Stan-BK/easier-scroll-vue#readme",
   "dependencies": {
-    "easier-scroll": "^1.0.4",
+    "easier-scroll": "^1.0.5",
     "vue": "^3.2.39"
   }
 }
